@@ -211,7 +211,7 @@ macro_rules! de_num {
             if unsigned {
                 buf.$u()
                     .ok_or_else(unexpected_buf_eof)
-                    .map(|x| Int(x as i64))
+                    .map(|x| UInt(x as u64))
             } else {
                 buf.$i()
                     .ok_or_else(unexpected_buf_eof)
@@ -321,7 +321,7 @@ impl Value {
         if unsigned {
             buf.checked_eat_u64_le()
                 .ok_or_else(unexpected_buf_eof)
-                .map(|x| i64::try_from(x).map(Int).unwrap_or_else(|_| UInt(x)))
+                .map(|x| UInt(x))
         } else {
             buf.checked_eat_i64_le()
                 .ok_or_else(unexpected_buf_eof)

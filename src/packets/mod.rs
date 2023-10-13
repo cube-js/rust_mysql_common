@@ -335,6 +335,16 @@ pub struct SessionStateInfo<'a> {
 }
 
 impl<'a> SessionStateInfo<'a> {
+    pub fn new(
+        data_type: Const<SessionStateType, u8>,
+        data: RawBytes<'a, LenEnc>,
+    ) -> Self {
+        Self {
+            data_type,
+            data
+        }
+    }
+
     pub fn into_owned(self) -> SessionStateInfo<'static> {
         let SessionStateInfo { data_type, data } = self;
         SessionStateInfo {
